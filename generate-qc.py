@@ -1,7 +1,9 @@
 import json
 
+# Edit this
 path="/path/to/qc/"
 
+# Edit this, assuming raw QC files are similarly generated as the ones below
 files = {
     "Batch File Request for Alaska off grid Site Class A.csv": "Batch Request Results for Alaska off grid Site Class A.csv",
     "Batch File Request for Alaska off grid Site Class B.csv": "Batch Request Results for Alaska off grid Site Class B.csv",
@@ -28,14 +30,12 @@ files = {
 qc_arr = []
 
 for key, value in files.items():
-    #print key + " " + value
 
     key_lines = []
     value_lines = []
 
     file = open(path+key, "r")
     for line in file:
-        # print line
         key_lines.append(line)
 
     file = open(path+value, "r")
@@ -69,7 +69,7 @@ for key, value in files.items():
         }
 
         key_values = kl.split(",")
-        #print values[0].strip() + "*" + values[1].strip()
+
         key_lat = key_values[0].strip()
         key_long = key_values[1].strip()
         key_class = key_values[2].strip()
@@ -88,8 +88,6 @@ for key, value in files.items():
 
         key_area = key_values[4].strip()
 
-        #print key_area
-
         for vl in value_lines:
             value_values = vl.split(",")
             value_lat = value_values[0].strip()
@@ -101,8 +99,6 @@ for key, value in files.items():
                 value_fpga = value_values[6]
                 value_as = value_values[9]
                 value_sds = value_values[10]
-
-                #print value_lat + "," + value_long + "," + key_area + "," + key_class_s + "," + value_pga + "," + value_fpga + "," + value_as + "," + value_sds
 
                 qc["request"]["parameters"]["latitude"] = value_lat
                 qc["request"]["parameters"]["longitude"] = value_long
